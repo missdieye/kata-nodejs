@@ -1,0 +1,11 @@
+[
+	{
+		"level": "not vaccinated"
+	},
+	{
+		"level": "recent case of covid"
+	},
+	{
+		"level": "vaccinated"
+	}
+]

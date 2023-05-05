@@ -1,0 +1,42 @@
+[
+	{
+		"firstName": "Alice",
+		"lastName": "Dubois",
+		"age": 32,
+		"phoneNumber": "06 12 34 56 78",
+		"address": "12 Rue de la Paix, 75001 Paris",
+		"level": "vaccinated"
+	},
+	{
+		"firstName": "Bob",
+		"lastName": "Smith",
+		"age": 45,
+		"phoneNumber": "06 23 45 67 89",
+		"address": "12 Route de la Paix, 75001 Paris",
+		"level": "not vaccinated"
+	},
+	{
+		"firstName": "Charlie",
+		"lastName": "Brown",
+		"age": 27,
+		"phoneNumber": "06 23 45 67 10",
+		"address": "12 Chemin de la Paix, 75001 Paris",
+		"level": "recent case of covid"
+	},
+	{
+		"firstName": "David",
+		"lastName": "Nguyen",
+		"age": 19,
+		"phoneNumber": "+33 4 56 78 90 12",
+		"address": "10 Rote du Bac, 75007 Paris",
+		"level": "not vaccinated"
+	},
+	{
+		"firstName": "Elena",
+		"lastName": "Garcia",
+		"age": 53,
+		"phoneNumber": "+33 4 56 78 90 32",
+		"address": "10 Rue du Bac, 75007 Paris",
+		"level": "recent case of covid"
+	}
+]

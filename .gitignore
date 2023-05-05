@@ -1,0 +1,7 @@
+# node modules of can_i_go_dieye in the gitignore
+
+can_i_go_dieye/node_modules
+can_i_go_dieye/node_modules/*
+can_i_go_dieye/.env
+
+

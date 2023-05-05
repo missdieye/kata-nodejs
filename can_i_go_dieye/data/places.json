@@ -1,0 +1,44 @@
+[
+	{
+		"name": "1234 can",
+		"address": "1234 can ",
+		"phoneNumber": 1234567890,
+		"minPassLevel": "recent case of covid",
+		"minAge": 21
+	},
+	{
+		"name": "1234 i",
+		"address": "1234 i",
+		"phoneNumber": 2234567890,
+		"minPassLevel": "not vaccinated",
+		"minAge": 17
+	},
+	{
+		"name": "1234 go",
+		"address": "1234 go",
+		"phoneNumber": 3234567890,
+		"minPassLevel": "vaccinated",
+		"minAge": 18
+	},
+	{
+		"name": "1234 yes",
+		"address": "1234 yes",
+		"phoneNumber": 4234567890,
+		"minPassLevel": "vaccinated",
+		"minAge": 18
+	},
+	{
+		"name": "1234 we",
+		"address": "1234 we",
+		"phoneNumber": 5234567890,
+		"minPassLevel": "not vaccinated",
+		"minAge": 15
+	},
+	{
+		"name": "123 can",
+		"address": "123 can",
+		"phoneNumber": 6234567890,
+		"minPassLevel": "recent case of covid",
+		"minAge": 28
+	}
+]

@@ -1,0 +1,695 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "APIs Document of CAN I GO",
+		"description": "CAN I GO, an app used as a COVID context utility.This is the APIs Document"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8000/",
+			"description": "My local server"
+		}
+	],
+	"tags": [
+		{
+			"name": "Authentication",
+			"description": "Authentication of the app"
+		},
+		{
+			"name": "Can I Go?",
+			"description": "Can I Go to a place"
+		},
+		{
+			"name": "Which Places Can I Go?",
+			"description": "The places that you can go"
+		},
+		{
+			"name": "Users",
+			"description": "Users of the app"
+		},
+		{
+			"name": "Places",
+			"description": "Places of the app"
+		},
+		{
+			"name": "Pass",
+			"description": "Passes of the users app"
+		}
+	],
+	"paths": {
+		"/user": {
+			"post": {
+				"tags": ["Users"],
+				"summary": "Create a new user",
+				"requestBody": {
+					"description": "User to create",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/User"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success! Content Created "
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/users": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Get all users of the app",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Users"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Get a user by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of user to return",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Users"],
+				"summary": "Delete a user by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of user to delete",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Deleted! No Content to return"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Users"],
+				"summary": "Update a user by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of user to update",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "User to update",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/UserUpdate"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/place": {
+			"post": {
+				"tags": ["Places"],
+				"summary": "Create a new place",
+				"requestBody": {
+					"description": "Place to create",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Place"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success! Content Created "
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/places": {
+			"get": {
+				"tags": ["Places"],
+				"summary": "Get all places of the app",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Places"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/places/{id}": {
+			"get": {
+				"tags": ["Places"],
+				"summary": "Get a place by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of place to return",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Places"],
+				"summary": "Update a place by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of place to update",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Place to update",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/PlaceUpdate"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Places"],
+				"summary": "Delete a place by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of place to delete",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Deleted! No Content to return"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/pass": {
+			"post": {
+				"tags": ["Pass"],
+				"summary": "Create a new pass",
+				"requestBody": {
+					"description": "Pass to create",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Pass"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success! Content Created "
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/passes": {
+			"get": {
+				"tags": ["Pass"],
+				"summary": "Get all passes of the app",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Passes"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		},
+		"/passes/{id}": {
+			"get": {
+				"tags": ["Pass"],
+				"summary": "Get a pass by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of pass to return",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Pass"],
+				"summary": "Update a pass by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of pass to update",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Pass to update",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Pass"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Pass"],
+				"summary": "Delete a pass by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of pass to delete",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Deleted! No Content to return"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Users": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"age": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"passId": {
+						"type": "string"
+					}
+				}
+			},
+			"User": {
+				"type": "object",
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"age": {
+						"type": "integer"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"statut": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					}
+				},
+				"required": ["firstName", "lastName", "age", "phoneNumber", "address", "statut"]
+			},
+			"UserUpdate": {
+				"type": "object",
+				"properties": {
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"age": {
+						"type": "integer"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"statut": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					}
+				}
+			},
+			"Places": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"minPassLevel": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					},
+					"minAge": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"Place": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"minPassLevel": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					},
+					"minAge": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"required": ["name", "address", "phoneNumber", "minPassLevel", "minAge"]
+			},
+			"PlaceUpdate": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"address": {
+						"type": "string"
+					},
+					"phoneNumber": {
+						"type": "string"
+					},
+					"minPassLevel": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					},
+					"minAge": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"Passes": {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"level": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					}
+				}
+			},
+			"Pass": {
+				"type": "object",
+				"properties": {
+					"level": {
+						"type": "string",
+						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					}
+				},
+				"required": ["level"]
+			}
+		}
+	}
+}
