@@ -65,6 +65,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -92,6 +95,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -123,6 +129,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -152,6 +161,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -192,6 +204,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -223,6 +238,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -250,6 +268,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -281,6 +302,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -321,6 +345,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -350,6 +377,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -381,6 +411,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -408,6 +441,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -439,6 +475,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -479,6 +518,9 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			},
@@ -508,6 +550,91 @@
 					},
 					"400": {
 						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			}
+		},
+		"/canigo": {
+			"post": {
+				"tags": ["Can I Go?"],
+				"summary": "Can I Go to a place",
+				"requestBody": {
+					"description": "User and place to check",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Canigo"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Canigo"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			}
+		},
+		"/placesicanigo": {
+			"post": {
+				"tags": ["Which Places Can I Go?"],
+				"summary": "Get all places that I can go",
+				"requestBody": {
+					"description": "User and place to check",
+					"required": true,
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/placesICanGo"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/placesICanGo"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
 					}
 				}
 			}
@@ -689,6 +816,27 @@
 					}
 				},
 				"required": ["level"]
+			},
+			"Canigo": {
+				"type": "object",
+				"properties": {
+					"userId": {
+						"type": "string"
+					},
+					"place": {
+						"type": "string",
+						"enum": [],
+						"x-component": "select"
+					}
+				}
+			},
+			"placesICanGo": {
+				"type": "object",
+				"properties": {
+					"userId": {
+						"type": "string"
+					}
+				}
 			}
 		}
 	}

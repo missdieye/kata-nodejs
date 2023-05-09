@@ -1,6 +1,8 @@
 const userModel = require("../models/user");
 const passModel = require("../models/pass");
 const levelModel = require("../models/level");
+const placeModel = require("../models/place");
+const Services = require("../services/services");
 
 // get all users
 exports.getAllUsers = async (req, res) => {
@@ -89,10 +91,60 @@ exports.deleteUser = async (req, res) => {
 // check if a user can go to a place
 exports.canIGo = async (req, res) => {
 	try {
-		const user = await userModel.findById(req.params.id).populate("pass").populate("level");
+		const user = await userModel.findById(req.body.userId).populate("passId");
 		if (!user) return res.status(404).send("No user found");
-		const place = await placeModel.findById(req.params.placeId);
+		let place;
+		// search place if swagger is used
+		if (req.body.place) {
+			let placeName = req.body.place.split(" - ")[0];
+			let placeAddress = req.body.place.split(" - address: ")[1];
+			place = await placeModel.findOne({ name: placeName, address: placeAddress });
+		} else {
+			place = await placeModel.findById(req.body.placeId);
+		}
 		if (!place) return res.status(404).send("No place found");
+		// search level of the user pass and the level of the place
+		const levelPassUser = await levelModel.findById(user.passId.level);
+		if (!levelPassUser) return res.status(404).send("No level found for this user");
+		const levelPlace = await levelModel.findById(place.minPassLevel);
+		if (!levelPlace) return res.status(404).send("No level found FOR this place");
+		// console.log("place", place, levelPassUser);
+		// compare levels
+		if (place.minAge <= user.age) {
+			let canGoRecentCase = true;
+			if (levelPassUser.level == "recent case of covid") {
+				canGoRecentCase = await Services.checkIfUserHaveTemporaryPass(user.passId.dateOfCovid);
+			}
+			if (
+				levelPlace.level == "not vaccinated" ||
+				levelPassUser.level == levelPlace.level ||
+				(levelPlace.level == "vaccinated" && canGoRecentCase)
+			) {
+				res.status(200).send(
+					"You can go to this place. The level of your pass is " +
+						levelPassUser.level +
+						" and the minimal level of this place is " +
+						levelPlace.level +
+						"."
+				);
+			} else if (!canGoRecentCase) {
+				res.status(200).send(
+					"You can't go to this place. The level of your pass is " +
+						levelPassUser.level +
+						". Your covid is recent, you have to wait 14 days or your covid is older than 4 months, you have to get vaccinated."
+				);
+			} else {
+				res.status(200).send(
+					"You can't go to this place. You are not vaccinated. The level of your pass is " +
+						levelPassUser.level +
+						" and the minimal level of this place is " +
+						levelPlace.level +
+						"."
+				);
+			}
+		} else {
+			res.status(200).send("You can't go to this place. You are too young");
+		}
 	} catch (err) {
 		res.status(500).send(err);
 	}

@@ -24,4 +24,7 @@ app.put("/users/:id", urlencodedParser, userController.updateUser);
 // delete a user
 app.delete("/users/:id", userController.deleteUser);
 
+// can i go
+app.post("/canigo", urlencodedParser, userController.canIGo);
+
 module.exports = app;

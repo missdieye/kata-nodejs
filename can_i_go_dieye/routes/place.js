@@ -24,4 +24,7 @@ app.put("/places/:id", urlencodedParser, placeController.updatePlace);
 // delete a place
 app.delete("/places/:id", placeController.deletePlace);
 
+// places i can go
+app.post("/placesicanigo", urlencodedParser, placeController.placesICanGo);
+
 module.exports = app;

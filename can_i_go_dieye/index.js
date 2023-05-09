@@ -74,9 +74,30 @@ for (let i = 0; i < users.length; i++) {
 	}
 }
 
-// call swagger
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// update places in swagger
+const updateSwaggerEnumPlace = async () => {
+	try {
+		const places = await placeModel.find();
+		const enumValues = places.map((place) => place.name + " - address: " + place.address);
+		// update swagger enum places in swagger.json
+		try {
+			swaggerDocument.components.schemas.Canigo.properties.place.enum = enumValues;
+		} catch (error) {
+			console.error(error);
+		}
 
-app.listen(8000, () => {
-	console.log(`App server now listening on port ${8000}`);
+		console.log("Swagger enum places updated successfully!");
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+// call updateSwaggerEnumPlace() and wait for it to finish
+updateSwaggerEnumPlace().then(() => {
+	// call swagger
+	app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+	app.listen(8000, () => {
+		console.log(`App server now listening on port ${8000}`);
+	});
 });
