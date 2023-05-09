@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
-const swaggerUi = require("swagger-ui-express"),
-	swaggerDocument = require("./swagger.json");
+const swaggerUi = require("swagger-ui-express");
+swaggerDocument = require("./swagger.json");
 const db = require("./config/db");
 const app = express();
 // routes
@@ -34,6 +34,7 @@ for (let i = 0; i < levels.length; i++) {
 	levelModel.findOne({ level: levels[i].level }).then((result) => {
 		if (!result) {
 			levelModel.create(levels[i]);
+			console.log(levels[i].level + " created");
 		}
 	});
 }
@@ -46,6 +47,7 @@ for (let i = 0; i < places.length; i++) {
 				places[i].minPassLevel = level._id;
 				placeModel.create(places[i]);
 			});
+			console.log(places[i].name + " created");
 		}
 	});
 }
@@ -57,6 +59,7 @@ for (let i = 0; i < users.length; i++) {
 			if (!result) {
 				// search level
 				levelModel.findOne({ level: users[i].level }).then((level) => {
+					console.log("level", level);
 					// create pass
 					passModel
 						.create({
@@ -67,6 +70,7 @@ for (let i = 0; i < users.length; i++) {
 							userModel.create(users[i]);
 						});
 				});
+				console.log(users[i].firstName + " " + users[i].lastName + " created");
 			}
 		});
 	} catch (e) {

@@ -70,7 +70,7 @@ exports.deletePlace = async (req, res) => {
 	try {
 		const place = await placeModel.deleteOne({ _id: req.params.id });
 		if (!place) return res.status(404).send("No place found");
-		res.status(204).send(place);
+		res.status(204).send("Place deleted, no content to send back");
 	} catch (err) {
 		res.status(500).send(err);
 	}

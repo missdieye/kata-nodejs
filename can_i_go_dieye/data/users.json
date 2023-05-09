@@ -1,11 +1,21 @@
 [
 	{
+		"firstName": "Dija",
+		"lastName": "Dieye",
+		"age": 32,
+		"phoneNumber": "06 12 34 56 78",
+		"address": "12 Rue valbonne, 06560 Nice",
+		"level": "vaccinated",
+		"role": "admin"
+	},
+	{
 		"firstName": "Alice",
 		"lastName": "Dubois",
 		"age": 32,
 		"phoneNumber": "06 12 34 56 78",
 		"address": "12 Rue de la Paix, 75001 Paris",
-		"level": "vaccinated"
+		"level": "vaccinated",
+		"role": "user"
 	},
 	{
 		"firstName": "Bob",
@@ -13,7 +23,8 @@
 		"age": 45,
 		"phoneNumber": "06 23 45 67 89",
 		"address": "12 Route de la Paix, 75001 Paris",
-		"level": "not vaccinated"
+		"level": "not vaccinated",
+		"role": "placeOwner"
 	},
 	{
 		"firstName": "Charlie",
@@ -21,15 +32,17 @@
 		"age": 27,
 		"phoneNumber": "06 23 45 67 10",
 		"address": "12 Chemin de la Paix, 75001 Paris",
-		"level": "recent case of covid"
+		"level": "recent case of covid",
+		"role": "user"
 	},
 	{
 		"firstName": "David",
-		"lastName": "Nguyen",
+		"lastName": "Miguel",
 		"age": 19,
 		"phoneNumber": "+33 4 56 78 90 12",
 		"address": "10 Rote du Bac, 75007 Paris",
-		"level": "not vaccinated"
+		"level": "not vaccinated",
+		"role": "user"
 	},
 	{
 		"firstName": "Elena",
@@ -37,6 +50,7 @@
 		"age": 53,
 		"phoneNumber": "+33 4 56 78 90 32",
 		"address": "10 Rue du Bac, 75007 Paris",
-		"level": "recent case of covid"
+		"level": "recent case of covid",
+		"role": "user"
 	}
 ]

@@ -2,10 +2,25 @@ const userModel = require("../models/user");
 const passModel = require("../models/pass");
 const levelModel = require("../models/level");
 const placeModel = require("../models/place");
-const Services = require("../services/services");
+const jwt = require("jsonwebtoken");
+
+// authentification
+exports.authentification = async (req, res) => {
+	try {
+		const user = await userModel.findById(req.params.id);
+		if (!user) return res.status(404).send("No user found");
+		else {
+			const token = jwt.sign({ user }, process.env.SECRET_KEY);
+			res.status(200).send(token);
+		}
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 // get all users
 exports.getAllUsers = async (req, res) => {
+	console.log("req.user", req.user);
 	try {
 		const users = await userModel.find();
 		if (!users) return res.status(404).send("No users found");
@@ -45,7 +60,8 @@ exports.createUser = async (req, res) => {
 			phoneNumber: req.body.phoneNumber,
 			passId: pass._id,
 			address: req.body.address,
-			age: req.body.age
+			age: req.body.age,
+			role: req.body.role
 		});
 		await user.save();
 		res.status(201).send(user);
@@ -82,7 +98,7 @@ exports.deleteUser = async (req, res) => {
 	try {
 		const user = await userModel.deleteOne({ _id: req.params.id });
 		if (!user) return res.status(404).send("No user found");
-		res.status(204).send(user);
+		res.status(204).send("No content, user deleted");
 	} catch (err) {
 		res.status(500).send(err);
 	}

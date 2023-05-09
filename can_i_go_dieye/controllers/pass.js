@@ -66,7 +66,7 @@ exports.deletePass = async (req, res) => {
 	try {
 		const pass = await passModel.deleteOne({ _id: req.params.id });
 		if (!pass) return res.status(404).send("No pass found");
-		res.status(200).send(pass);
+		res.status(200).send("Pass deleted, no content");
 	} catch (err) {
 		res.status(500).send(err);
 	}

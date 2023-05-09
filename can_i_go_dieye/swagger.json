@@ -11,9 +11,14 @@
 			"description": "My local server"
 		}
 	],
+	"security": [
+		{
+			"bearerAuth": []
+		}
+	],
 	"tags": [
 		{
-			"name": "Authentication",
+			"name": "Get your bearer Authentication",
 			"description": "Authentication of the app"
 		},
 		{
@@ -38,6 +43,40 @@
 		}
 	],
 	"paths": {
+		"/authentification/{id}": {
+			"post": {
+				"tags": ["Get your bearer Authentication"],
+				"summary": "Get a bearer token",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Your user ID",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			}
+		},
 		"/user": {
 			"post": {
 				"tags": ["Users"],
@@ -135,38 +174,6 @@
 					}
 				}
 			},
-			"delete": {
-				"tags": ["Users"],
-				"summary": "Delete a user by id",
-				"parameters": [
-					{
-						"name": "id",
-						"in": "path",
-						"description": "ID of user to delete",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				],
-				"responses": {
-					"204": {
-						"description": "Deleted! No Content to return"
-					},
-					"404": {
-						"description": "Not Found"
-					},
-					"500": {
-						"description": "Internal Server Error"
-					},
-					"400": {
-						"description": "Bad Request"
-					},
-					"403": {
-						"description": "Forbidden"
-					}
-				}
-			},
 			"put": {
 				"tags": ["Users"],
 				"summary": "Update a user by id",
@@ -195,6 +202,38 @@
 				"responses": {
 					"200": {
 						"description": "OK"
+					},
+					"404": {
+						"description": "Not Found"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					},
+					"400": {
+						"description": "Bad Request"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Users"],
+				"summary": "Delete a user by id",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "ID of user to delete",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Deleted! No Content to return"
 					},
 					"404": {
 						"description": "Not Found"
@@ -641,6 +680,13 @@
 		}
 	},
 	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		},
 		"schemas": {
 			"Users": {
 				"type": "object",
@@ -665,6 +711,9 @@
 						"type": "string"
 					},
 					"passId": {
+						"type": "string"
+					},
+					"role": {
 						"type": "string"
 					}
 				}
@@ -691,6 +740,11 @@
 						"type": "string",
 						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
 						"x-component": "select"
+					},
+					"role": {
+						"type": "string",
+						"enum": ["user", "admin", "placeOwner"],
+						"x-component": "select"
 					}
 				},
 				"required": ["firstName", "lastName", "age", "phoneNumber", "address", "statut"]
@@ -716,6 +770,11 @@
 					"statut": {
 						"type": "string",
 						"enum": ["not vaccinated", "recent case of covid", "vaccinated"],
+						"x-component": "select"
+					},
+					"role": {
+						"type": "string",
+						"enum": ["user", "admin", "placeOwner"],
 						"x-component": "select"
 					}
 				}
